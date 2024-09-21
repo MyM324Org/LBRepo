@@ -12,13 +12,12 @@
   </head>
   <body class="bg-gray-700">
     <div class="w-full h-screen flex justify-center">
-      
       <!-- Aktive Nutzer Box -->
-      <div class="bg-gray-600 flex flex-col p-4 w-auto h-auto">
+      <div class="border-4 border-gray-900 bg-gray-600 flex flex-col p-4 w-auto h-auto">
         <p class="text-white font-bold mb-2">Active Users:</p>
         <ul id="activeUsersList" class="text-white"></ul>
       </div>
-      
+
       <!-- Chatbox -->
       <div class="border-4 border-gray-900 max-w-2xl w-full md:w-3/4 lg:w-2/4 bg-gray-700 flex flex-col">
         <div class="bg-blue-500 px-4 py-4 rounded-b">
@@ -26,6 +25,11 @@
         </div>
         
         <div class="flex-grow flex flex-col justify-start p-4 gap-4" id="messages"></div>
+
+        <!-- Bereich für die Tipp-Anzeige -->
+        <div id="typingIndicator" class="text-cyan-300 px-4 py-2" style="display: none;">
+          Jemand tippt...
+        </div>
         
         <div class="bg-gray-600 px-4 py-4 flex items-center rounded-t">
           <input

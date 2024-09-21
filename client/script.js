@@ -24,7 +24,7 @@
         updateActiveUsersList(activeUsers);
         break;
       case 'typing':
-        typingUsers = message.users;
+        updateTypingIndicator(message.users, myUser);;
         break;
       default:
         break;
@@ -70,4 +70,28 @@ const updateActiveUsersList = (users) => {
     userElement.textContent = user.name;
     userListElement.appendChild(userElement);
   });
+};
+
+
+const updateTypingIndicator = (users, myUser) => { 
+  const typingIndicator = document.getElementById('typingIndicator'); 
+  if (!typingIndicator) {
+    console.error('Element with id "typingIndicator" not found.');
+    return;
+  }
+
+  const otherUsers = users.filter((user) => user.id !== myUser.id);
+
+  if (otherUsers.length === 0) {
+    typingIndicator.style.display = 'none'; 
+  } else if (otherUsers.length === 1) {
+    typingIndicator.style.display = 'block'; 
+    typingIndicator.textContent = `${otherUsers[0].name} tippt...`;
+  } else if (otherUsers.length === 2) {
+    typingIndicator.style.display = 'block';
+    typingIndicator.textContent = `${otherUsers[0].name} und ${otherUsers[1].name} tippen...`;
+  } else {
+    typingIndicator.style.display = 'block';
+    typingIndicator.textContent = `${otherUsers[0].name}, ${otherUsers[1].name} und weitere tippen...`;
+  }
 };
