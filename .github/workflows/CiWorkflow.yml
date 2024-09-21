@@ -6,7 +6,7 @@ on:
       - opened
       - synchronize
     branches:
-      - Dev
+      - dev
 
 jobs:
   ci-pipeline:
