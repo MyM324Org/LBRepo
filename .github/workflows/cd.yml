@@ -1,0 +1,56 @@
+name: CD Workflow
+
+on:
+  pull_request:
+    branches:
+      - main 
+    types:
+      - closed  
+
+env:
+  APP_NAME: julianchatapplb324
+  KUBERNETES_NAMESPACE: m324-csbe4
+  IMAGE_TAG: wusa889/m324lb:latest
+  BASE_URL: julian-chatapp.m324.hackerman.ch
+
+jobs:
+  CDflow:
+    runs-on: buildserver
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        
+      - name: Build
+        run: |
+          docker build -t wusa889/m324lb:latest .
+
+      - name: Push Image
+        run: docker push wusa889/m324lb:latest
+
+      - name: Check and Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+        id: install
+
+      - name: Set Kubernetes Context
+        uses: azure/k8s-set-context@v3
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Replace and Apply Kubernetes Manifests
+        uses: swdotcom/update-and-apply-kubernetes-configs@v1
+        with:
+          k8-config-file-paths: |
+            .k8/00_namespace.yml
+            .k8/01_deployment.yml
+            .k8/02_service.yml
+            .k8/03_ingress.yml
+          replacement-method: defined
