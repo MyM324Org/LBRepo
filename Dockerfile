@@ -17,5 +17,7 @@ RUN yarn build
 # Copy the source code to the container
 WORKDIR /app/build
 
+EXPOSE 3000
+
 # Start the server when the container starts
-CMD ["node", "index.js"]
+CMD ["yarn", "start"]
