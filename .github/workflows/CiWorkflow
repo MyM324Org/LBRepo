@@ -1,4 +1,4 @@
-name: Ci Pipeline
+name: CI Pipeline
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - Dev
 
 jobs:
-  CI Pipeline
+  ci-pipeline:
     runs-on: buildserver
     steps:
       - name: Checkout repository
