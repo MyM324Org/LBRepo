@@ -1,8 +1,12 @@
 name: Ci Pipeline
 
-pull_request:
-  branches:
-    - Dev
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - Dev
 
 jobs:
   CI Pipeline
