@@ -25,3 +25,10 @@ spec:
                 name: ${APP_NAME} # Change this to your app name
                 port:
                   number: 80
+          - path: /healthcheck
+            pathType: Prefix
+            backend:
+              service:
+                name: ${APP_NAME}
+                port:
+                  number: 80
