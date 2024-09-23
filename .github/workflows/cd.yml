@@ -29,10 +29,10 @@ jobs:
         
       - name: Build
         run: |
-          docker build --no-cache -t wusa889/m324lb:latest .
+          docker build --no-cache -t wusa889/m324lb:${{ github.sha }} .
 
       - name: Push Image
-        run: docker push wusa889/m324lb:latest
+        run: docker push wusa889/m324lb:${{ github.sha }}
 
       - name: Check and Install kubectl
         uses: azure/setup-kubectl@v3
