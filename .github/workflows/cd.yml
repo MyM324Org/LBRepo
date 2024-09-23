@@ -10,7 +10,7 @@ on:
 env:
   APP_NAME: julianchatapplb324
   KUBERNETES_NAMESPACE: m324-csbe4
-  IMAGE_TAG: wusa889/m324lb:latest
+  IMAGE_TAG: wusa889/m324lb:${{ github.sha }}
   BASE_URL: julian-chatapp.m324.hackerman.ch
 
 jobs:
