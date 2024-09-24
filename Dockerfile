@@ -10,6 +10,8 @@ COPY . .
 # Install the dependencies
 RUN yarn install
 
+RUN yarn lint --fix
+
 RUN yarn test
 
 RUN yarn build
